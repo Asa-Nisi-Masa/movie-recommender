@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>My test page</title>
+
+        <link href="./styles/style.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Pathway+Gothic+One" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather" rel="stylesheet">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+        <script>
+            $(document).ready( function() {
+                $('#next_button_ratings').click(function() {
+                    $.ajax("{{ url_for('ratingsuploadnextmovie') }}").done(function (reply) {
+                        $('#prediction-from-ratings').html(reply);
+                    });
+                });
+                $('#previous_button_ratings').click(function() {
+                    $.ajax("{{ url_for('ratingsuploadpreviousmovie') }}").done(function (reply) {
+                        $('#prediction-from-ratings').html(reply);
+                    });
+                });
+                $('#next_button_similarity').click(function() {
+                    $.ajax("{{ url_for('similarmoviefindernext') }}").done(function (reply) {
+                        $('#prediction-from-similar').html(reply);
+                    });
+                });
+                $('#previous_button_similarity').click(function() {
+                    $.ajax("{{ url_for('similarmoviefinderprevious') }}").done(function (reply) {
+                        $('#prediction-from-similar').html(reply);
+                    });
+                });
+            });
+        </script>
+        <script>
+            $(function() {
+                $.ajax({
+                    url: '{{ url_for("autocomplete") }}'
+                }).done(function (data){
+                    $('#autocomplete').autocomplete({
+                        source: function(request, response) {
+                            var results = $.ui.autocomplete.filter(data, request.term);
+                            response(results.slice(0, 10));
+                        },
+                        minLength: 2
+                    });
+                });
+            });
+            </script>
+    </head>
+    
+    <body>
+        <nav>
+            <a href="/">Upload ratings</a>
+            <a href="/similar-movie-finder">Similar movies</a>
+            <a href="/about">About</a>
+        </nav>
+        
+        {% block upload_result %}
+        {% endblock %}
+        
+        {% block similar %}
+        {% endblock %}
+        
+        {% block about %}
+        {% endblock %}
+    </body>
+</html>

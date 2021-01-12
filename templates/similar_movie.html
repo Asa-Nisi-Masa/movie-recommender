@@ -1,0 +1,48 @@
+{% extends "index.html" %}
+{% block similar %}
+<div class="my-title">
+    <h1>Movie recommender</h1>
+</div>
+
+
+<div class="search">
+    <p>Add one or more movies, submit your choice and get similar movies recommended</p>
+
+    <div class="search-submit">
+        <form autocomplete="off" action="/search-bar">
+            {{ form.search_autocomplete(class_="search-submit-box", placeholder="Start typing a movie name...", required=True) }}
+            <button type="submit", class="add-button" name="search-add-button">Add</button>
+        </form>
+        <form action="/similar-movie-finder">
+            <button type="submit", class="submit-button" name="search-submit-button">Submit</button>
+        </form>    
+        {% if error %}
+            <div class="search-submit-error">
+                <p> {{error}} </p>
+            </div>
+        {% endif %}
+    </div>
+
+    {% for movie in user_added_movies %}
+        <p>
+            <a href={{movie.movie.hyperlink}} target="_blank" rel="noopener noreferrer">{{movie.movie.title}}</a>
+            <a href="/remove-similar-movie/{{movie.uuid}}">
+                <img alt="delete button" src="styles/delete.svg" height="24px">
+            </a>
+        </p>
+    {% endfor %}
+
+    {% if movies %}
+        <div class="previous-next-buttons-similar">
+            <button type="submit", class="submit-button" id="previous_button_similarity">Previous</button>
+            <button type="submit", class="submit-button" id="next_button_similarity">Next</button>
+        </div>
+    {% endif %}
+
+
+    <div class="prediction-from-similar", id="prediction-from-similar">
+        {% include "movie.html" %}
+    </div>
+</div>
+
+{% endblock %}

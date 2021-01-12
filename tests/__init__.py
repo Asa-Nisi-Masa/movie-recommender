@@ -1,0 +1,1 @@
+from .user_ratings_manager_test import UserRatingsManagerTest

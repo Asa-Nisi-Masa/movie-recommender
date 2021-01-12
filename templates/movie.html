@@ -1,0 +1,9 @@
+{% if movies %}
+    {% for movie in movies.shown_movies %}
+    <div class="movie-posters">
+        <p>{{movie.title}} ({{movie.year}})</p>
+        <a href={{movie.hyperlink}} target="_blank" rel="noopener noreferrer"><img src={{movie.poster}} onerror="this.src='./styles/poster.jpg'"></a>
+        <p>{{movie.genres}}</p>
+    </div>
+    {% endfor %}
+{% endif %}

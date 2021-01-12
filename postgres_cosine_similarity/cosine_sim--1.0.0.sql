@@ -1,0 +1,3 @@
+CREATE OR REPLACE FUNCTION
+cosine_sim(float4[], float4[]) RETURNS float4 AS 'MODULE_PATHNAME','cosine_sim'
+LANGUAGE C STRICT;

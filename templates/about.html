@@ -1,0 +1,32 @@
+{% extends "index.html" %}
+{% block about %}
+
+<div class="about">
+    <h1>
+        Instructions for preparing your ratings
+    </h1>
+    <p>
+        Movies are recommended based on your ratings. To prepare your IMDb ratings do the following:
+        <ul>
+            <li>Login to your IMDb account</li>
+            <li>Go to 'Your Ratings'</li>
+            <li>Look for the three vertical dots ⋮</li>
+            <li>Click and choose 'Export'</li>
+        </ul>
+    </p>
+    <p>
+        Alternatively, you can prepare your own ratings file. For that you need two columns:
+        <ul>
+            <li>'Const' or 'IMDbId' with IMDb movie ids</li>
+            <li>'Your Rating' with a 1-10 rating for each movie</li>
+        </ul>
+    </p>
+    <h1>
+        About the recommender
+    </h1>
+    <p>
+        This recommender was trained on publicly available movie datasets. As a result, it has no knowledge of newer movies (2018 and later).
+    </p>
+</div>
+
+{% endblock %}

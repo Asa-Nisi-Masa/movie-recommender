@@ -1,0 +1,58 @@
+{% extends "index.html" %}
+{% block upload_result %}
+
+<head>
+    {{ dropzone.load_css() }}
+    {{
+        dropzone.style('
+            border: 4px dashed #000000;
+            border-radius: 5px;
+            min-height: 20px;
+            max-height: 200px;
+            min-width: 20px;
+            font-size: 24px;
+            font-family: "Merriweather";
+            margin: 0 20% 0 20%;
+            color: #000000;
+            background: rgba(172, 147, 122, 0.5);
+            padding: 0.8rem 1rem !important;
+            box-shadow: 0 5px 12px -2px rgba(0, 0, 0, 0.5);
+            font-weight: 300;
+            opacity: 0.5;
+        ') 
+    }}
+</head>
+<div class="my-title">
+    <h1>Movie recommender</h1>
+</div>
+
+<div class="upload-text">
+    <span>
+        Prepare a .csv file of your ratings (see 'About' page for instructions),
+        <br>
+        upload it and get personalized recommendations
+    </span>
+</div>
+
+{{ dropzone.create(action_view='ratingsupload') }}
+{{ dropzone.load_js() }}
+{{ dropzone.config() }}
+
+{% if movies %}
+<div class="previous-next-buttons-upload">
+    <button type="submit", class="submit-button" id="previous_button_ratings">Previous</button>
+    <button type="submit", class="submit-button" id="next_button_ratings">Next</button>
+</div>
+{% endif %}
+
+<div class="prediction-from-ratings", id="prediction-from-ratings">
+    {% include "movie.html" %}
+</div>
+
+{% if error %}
+    <div class="upload-error">
+        <p>{{error}}</p>
+    </div>
+{% endif %}
+
+{% endblock %}

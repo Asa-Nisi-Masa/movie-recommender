@@ -1,0 +1,31 @@
+version: '2.4'
+
+services:
+  db:
+    image: myapp
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+  web:
+    image: myapp
+    depends_on:
+      - db
+    restart: always
+    command: [
+      "./wait-for-it.sh", "-t", "60", "db:5432", "--",
+      "bash", "-c", "python3 migrate.py && gunicorn --config gunicorn_config.py wsgi:app"
+    ]
+    ports:
+      - 5000:5000
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - web

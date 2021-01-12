@@ -1,0 +1,7 @@
+from .search_bar import SearchBar
+from .autocomplete import Autocomplete
+from .add_similar_movie import AddSimilarMovie
+from .remove_similar_movie import RemoveSimilarMovie
+from .similar_movie_finder import SimilarMovieFinder
+from .similar_movie_finder_next import SimilarMovieFinderNext
+from .similar_movie_finder_previous import SimilarMovieFinderPrevious
