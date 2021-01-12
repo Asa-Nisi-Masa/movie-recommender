@@ -64,15 +64,21 @@ html {
 /*************** Search similar movies ************/
 
 .about {
+    margin: 0 25%;
+    display: inline-block;
+    justify-content: center;
     color: #000000;
     text-align: center;
-    margin-top: 2cm;
     font-family: "Merriweather";
     font-size: 18px;
 }
 
 .about ul {
     display: inline-block;
+}
+
+.about li {
+    margin: 10px 0;
 }
 
 .search {
@@ -220,4 +226,8 @@ nav a:hover {
 nav a.active {
     background-color: #4CAF50;
     color: white;
+}
+
+.source-link {
+    float: right;
 }

@@ -2,6 +2,18 @@
 {% block about %}
 
 <div class="about">
+
+    <h1>
+        Features
+    </h1>
+    <p>
+        Currently two features are supported: movie recommendation based on your IMDb ratings and similar movie search:
+    <ul>
+        <li>Movie recommendations are obtained by using your ratings (and corresponding movie embeddings) to train your own user embedding. This user embedding is then used to compute the full movie-user matrix. From this matrix, the (predicted) highest-rated movies are found.</li>
+        <li>In similar movie search you enter one or more movie titles. The embeddings of all the entered movies are averaged out and you are shown other movies whose embeddings most closely match the averaged embedding obtained earlier.</li>
+    </ul>
+    </p>
+
     <h1>
         Instructions for preparing your ratings
     </h1>
@@ -20,12 +32,6 @@
             <li>'Const' or 'IMDbId' with IMDb movie ids</li>
             <li>'Your Rating' with a 1-10 rating for each movie</li>
         </ul>
-    </p>
-    <h1>
-        About the recommender
-    </h1>
-    <p>
-        This recommender was trained on publicly available movie datasets. As a result, it has no knowledge of newer movies (2018 and later).
     </p>
 </div>
 

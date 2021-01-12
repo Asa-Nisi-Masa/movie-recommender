@@ -11,6 +11,14 @@ http://www.movierecommender.org
 The app uses a matrix factorization model to learn user and movie embeddings. These embeddings can then be used to find similar movies or to recommend movies to a new user.
 
 
+## Features
+
+Currently two features are supported: movie recommendation based on your IMDb ratings and similar movie search:
+
+- Movie recommendations are obtained by using your ratings (and corresponding movie embeddings) to train your own user embedding. This user embedding is then used to compute the full movie-user matrix. From this matrix, the (predicted) highest-rated movies are found.
+
+- In similar movie search you enter one or more movie titles. The embeddings of all the entered movies are averaged out and you are shown other movies whose embeddings most closely match the averaged embedding obtained earlier.
+
 ## Getting Started
 
 This section contains the steps required to reproduce the app locally. Depending on how closely you want to replicate the app, some steps can possibly be ignored.
