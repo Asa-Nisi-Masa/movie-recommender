@@ -57,5 +57,5 @@ Once the tables have been filled, generate a database dump with, e.g.
 
 ## Running
 
-- `docker-compose up`
-- Go to `0.0.0.0:5000`
+- Execute `docker-compose up`
+- Once the containers are running, go to `0.0.0.0:5000`
