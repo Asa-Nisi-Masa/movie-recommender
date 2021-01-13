@@ -228,6 +228,7 @@ nav a.active {
     color: white;
 }
 
-.source-link {
+.fa.fa-github {
+    font-size: 36px;
     float: right;
 }
