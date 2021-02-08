@@ -33,11 +33,17 @@ class MovieModel:
         return Movie(*row)
 
     def get_number_of_movies(self) -> int:
+        if self.__connection is None:
+            return 0
+
         cursor = self.__connection.cursor()
         cursor.execute("SELECT COUNT(*) FROM movies")
         return cursor.fetchone()[0]
 
     def get_number_of_users(self) -> int:
+        if self.__connection is None:
+            return 0
+
         cursor = self.__connection.cursor()
         cursor.execute("SELECT COUNT(*) FROM users")
         return cursor.fetchone()[0]
