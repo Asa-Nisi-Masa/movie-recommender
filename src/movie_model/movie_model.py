@@ -1,5 +1,6 @@
 from typing import List
 import torch
+import psycopg2
 
 from src.services.db_connection_manager import DbConnectionManager
 from src.entities import Movie
@@ -10,6 +11,9 @@ class MovieModel:
 
     def __init__(self, db_connection_manager: DbConnectionManager):
         self.__connection = db_connection_manager.get_connection()
+
+    def set_connection(self, connection: psycopg2._ext.connection) -> None:
+        self.__connection = connection
 
     def get_imdb_ids_and_ids(self) -> list:
         cursor = self.__connection.cursor()
