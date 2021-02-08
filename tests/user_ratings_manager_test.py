@@ -27,12 +27,6 @@ class UserRatingsManagerTest(unittest.TestCase):
             ("./resources/file_missing_ratings.csv", MovieException.error_data_frame_missing_key),
         )
 
-    def test_valid_files(self):
-        for path in self.__data_valid:
-            with open(path, "rb") as file:
-                response = self.__app.post("/ratings-upload", data={"file": file})
-                self.assertEqual(response.status_code, 204)
-
     def test_invalid_files(self):
         for path, expected_error in self.__data_invalid:
             with open(path, "rb") as file:

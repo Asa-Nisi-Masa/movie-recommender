@@ -1,6 +1,8 @@
 import os
 from typing import Optional
 import psycopg2
+# import testing.postgresql
+from src.services.test_db_manager import test_db_manager
 
 
 class DbConnectionManager:
@@ -22,4 +24,4 @@ class DbConnectionManager:
         try:
             self.__connection = psycopg2.connect(**dsn)
         except psycopg2.OperationalError:
-            return
+            self.__connection = test_db_manager.get_test_connection()

@@ -91,10 +91,18 @@ class MovieModel:
         cursor = self.__connection.cursor()
         cursor.execute("SELECT encoding FROM movies")
 
-        return torch.tensor(cursor.fetchall())[:, 0, :]
+        rows = cursor.fetchall()
+        if rows == []:
+            return torch.tensor([])
+
+        return torch.tensor(rows)[:, 0, :]
 
     def get_user_encodings(self) -> torch.Tensor:
         cursor = self.__connection.cursor()
         cursor.execute("SELECT encoding FROM users")
 
-        return torch.tensor(cursor.fetchall())[:, 0, :]
+        rows = cursor.fetchall()
+        if rows == []:
+            return torch.tensor([])
+
+        return torch.tensor(rows)[:, 0, :]
