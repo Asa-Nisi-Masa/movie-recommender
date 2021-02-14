@@ -5,8 +5,8 @@ RUN apt-get update && \
 
 RUN rm -rf /var/lib/apt/lists/*
 
+COPY --chown=postgres:postgres . /app/movies
 WORKDIR /app/movies
-COPY . /app/movies
 
 RUN pip3 install -r requirements.txt --no-cache-dir
 
@@ -15,7 +15,7 @@ RUN make && \
     sudo make install
 
 WORKDIR /app/movies
-
+USER postgres
 RUN chmod u+x ./wait-for-it.sh
 
 EXPOSE 5000

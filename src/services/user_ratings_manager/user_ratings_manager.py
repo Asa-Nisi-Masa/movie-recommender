@@ -1,7 +1,6 @@
 from typing import Tuple
 import pandas as pd
 from pandas.errors import EmptyDataError
-import torch
 import numpy as np
 from werkzeug.datastructures import FileStorage
 
@@ -14,7 +13,7 @@ class UserRatingsManager:
     def __init__(self, mapper: Mapper):
         self.__mapper = mapper
 
-    def get_user_movies_and_ratings(self, file: FileStorage) -> Tuple[torch.Tensor, torch.Tensor]:
+    def get_user_movies_and_ratings(self, file: FileStorage) -> Tuple[list]:
         data_frame = self.__get_valid_data_frame(file)
         raw_imdb_ids = self.__get_valid_imdb_ids(data_frame)
         raw_ratings = self.__get_valid_ratings(data_frame)
@@ -55,7 +54,7 @@ class UserRatingsManager:
 
     def __get_ids_and_ratings(
         self, raw_imdb_ids: np.ndarray, raw_ratings: np.ndarray
-    ) -> Tuple[torch.Tensor, torch.Tensor]:
+    ) -> Tuple[np.ndarray]:
 
         ids = []
         ratings = []
@@ -65,4 +64,4 @@ class UserRatingsManager:
                 ids.append(id_)
                 ratings.append(raw_rating)
 
-        return torch.tensor(ids).long(), torch.tensor(ratings).long()
+        return np.array(ids), np.array(ratings)

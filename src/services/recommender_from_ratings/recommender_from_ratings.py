@@ -1,6 +1,5 @@
 from typing import List
 import numpy as np
-import torch
 from werkzeug.datastructures import FileStorage
 
 from src.entities import Movie, RecommendedMovies
@@ -38,14 +37,14 @@ class RecommenderFromRatings:
 
         return RecommendedMovies(movies_with_full_info)
 
-    def __get_normalized_ratings(self, ratings: torch.Tensor) -> torch.Tensor:
+    def __get_normalized_ratings(self, ratings: np.ndarray) -> np.ndarray:
         return (ratings/2 - self.__ratings_mean) / self.__ratings_std
 
-    def __get_recommendations(self, normalized_ratings: torch.Tensor, user_ids: torch.Tensor) -> List[Movie]:
+    def __get_recommendations(self, normalized_ratings: np.ndarray, user_ids: np.ndarray) -> List[Movie]:
         summed = 0
         for rating, id_ in zip(normalized_ratings, user_ids):
-            encoding = self.__movie_model.get_movie_by_id(str(id_.item())).encoding
-            weight = rating.item()
+            encoding = self.__movie_model.get_movie_by_id(str(id_)).encoding
+            weight = rating
             summed += (weight*np.array(encoding))
 
         num_of_movies_to_fetch = len(normalized_ratings) + self.__recommendations_from_ratings_to_retrieve
@@ -53,7 +52,7 @@ class RecommenderFromRatings:
     
         filtered = []
         for movie in recommendations:
-            if movie.id_ not in user_ids.numpy():
+            if movie.id_ not in user_ids:
                 filtered.append(movie)
 
                 if len(filtered) == self.__recommendations_from_ratings_to_retrieve:

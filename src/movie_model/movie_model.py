@@ -1,5 +1,4 @@
 from typing import List
-import torch
 
 from src.services.db_connection_manager import DbConnectionManager
 from src.entities import Movie
@@ -86,23 +85,3 @@ class MovieModel:
         )
         rows = cursor.fetchall()
         return [Movie(*row) for row in rows]
-
-    def get_movie_encodings(self) -> torch.Tensor:
-        cursor = self.__connection.cursor()
-        cursor.execute("SELECT encoding FROM movies")
-
-        rows = cursor.fetchall()
-        if rows == []:
-            return torch.tensor([])
-
-        return torch.tensor(rows)[:, 0, :]
-
-    def get_user_encodings(self) -> torch.Tensor:
-        cursor = self.__connection.cursor()
-        cursor.execute("SELECT encoding FROM users")
-
-        rows = cursor.fetchall()
-        if rows == []:
-            return torch.tensor([])
-
-        return torch.tensor(rows)[:, 0, :]
