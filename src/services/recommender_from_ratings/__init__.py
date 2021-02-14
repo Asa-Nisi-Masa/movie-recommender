@@ -9,6 +9,5 @@ from .recommender_from_ratings import RecommenderFromRatings
 recommender_from_ratings = RecommenderFromRatings(
     user_ratings_manager,
     movie_model,
-    user_trainer,
     movie_info_provider,
 )
